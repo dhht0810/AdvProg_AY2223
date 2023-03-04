@@ -4,5 +4,5 @@
 std::string printGameOver(){
 	// TODO: Return the required string
 	std::cout <<"";
-	return "Game Not Over!";
+	return "Game Over!";
 }
