@@ -28,6 +28,10 @@ vector<string> filterWordsByLen(int wordLen, const vector<string>& vocabulary)
 {
     vector<string> answer;
     //Write your code here
+    for (string str : vocabulary){
+        if (str.size() != wordLen) continue;
+        answer.push_back(str);
+    }
     return answer;
 }
 
@@ -56,6 +60,11 @@ map<char, int> countOccurrences(const vector<string>& candidateWords)
 {
     map<char, int> answer;
     //Write your code here
+     for (string str : candidateWords){
+        for (char ch : str){
+            ++answer[ch];
+        }
+    }
     return answer;
 }
 
@@ -71,6 +80,7 @@ char findMostFrequentChar(const map<char, int>& occurrences, const set<char>& se
 {
     char answer;
     //Write your code here
+    
     return answer;
 }
 
@@ -85,7 +95,7 @@ char findMostFrequentChar(const map<char, int>& occurrences, const set<char>& se
 char findBestChar(const vector<string>& candidateWords, const set<char>& selectedChars)
 {
     char answer;
-    //Write your code here
+    answer = findMostFrequentChar(countOccurrences(candidateWords), selectedChars);
     return answer;
 }
 
@@ -110,6 +120,7 @@ bool isCorrectChar(char ch, const string& mask)
 {
     bool answer;
     //Write your code here
+    answer = isCharInWord(ch, mask);
     return answer;
 }
 
@@ -125,6 +136,10 @@ bool isWholeWord(const string& mask)
 {
      bool answer;
     //Write your code here
+    for (char ch : mask){
+        if (ch < 'a' || ch > 'z') return false;
+    }
+    return true;
     return answer;
 }
 
@@ -144,6 +159,10 @@ bool wordConformToMask(const string& word, const string& mask, char ch)
 {
     bool answer;
     //Write your code here
+     for (int i = 0; i < mask.size(); ++i){
+        if (ch == mask[i] && ch != word[i]) return false;
+    }
+    return true;
     return answer;
 }
 
@@ -163,5 +182,9 @@ vector<string> filterWordsByMask(const vector<string>& words, const string& mask
 {
     vector<string> answer;
     //Write your code here
+    for (string str : words){
+        if (!wordConformToMask(str, mask, ch)) continue;
+        answer.push_back(str);
+    }
     return answer;
 }
